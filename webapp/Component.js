@@ -1,0 +1,26 @@
+sap.ui.define(
+  ["sap/ui/core/UIComponent", "sap/ui/model/json/JSONModel"],
+  function (UIComponent, JSONModel) {
+    "use strict";
+
+    const Component = UIComponent.extend("ui5.tutorial.walkthrough.Component", {
+      metadata: {
+        interfaces: ["sap.ui.core.IAsyncContentCreation"],
+        manifest: "json",
+      },
+      init() {
+        UIComponent.prototype.init.call(this);
+
+        // set data model
+        const data = {
+          recipient: {
+            name: "World",
+          },
+        };
+        const dataModel = new JSONModel(data);
+        this.setModel(dataModel);
+      },
+    });
+    return Component;
+  },
+);

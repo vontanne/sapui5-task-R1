@@ -10,7 +10,14 @@ sap.ui.define(
       "ui5.tutorial.walkthrough.controller.App",
       {
         onShowHello() {
-          MessageToast.show("Hello World");
+          const resourceBundle = this.getView()
+            ?.getModel("i18n")
+            ?.getResourceBundle();
+          const recipient = this.getView()
+            ?.getModel()
+            ?.getProperty("/recipient/name");
+          const msg = resourceBundle.getText("helloMsg", [recipient]);
+          MessageToast.show(msg);
         },
       },
     );
