@@ -1,1 +1,10 @@
-alert("UI5 is ready");
+sap.ui.define(["sap/ui/core/mvc/XMLView"], function (XMLView) {
+  "use strict";
+
+  XMLView.create({
+    viewName: "ui5.tutorial.walkthrough.view.App",
+    id: "app",
+  }).then(function (view) {
+    view.placeAt("content");
+  });
+});
