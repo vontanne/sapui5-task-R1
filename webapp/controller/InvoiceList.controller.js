@@ -16,13 +16,18 @@ sap.ui.define(
         });
         this.getView()?.setModel(viewModel, "view");
       },
-      onFilterInvoices(event) {
+      onFilterInvoices() {
         const filter = [];
-        const query = event.getParameter("query");
+        const query = this.byId("searchField")?.getValue();
         if (query) {
           filter.push(
             new Filter("ProductName", FilterOperator.Contains, query),
           );
+        }
+
+        const status = this.byId("statusFilter")?.getSelectedKey();
+        if (status && status !== "all") {
+          filter.push(new Filter("Status", FilterOperator.EQ, status));
         }
 
         const list = this.byId("invoiceList");
