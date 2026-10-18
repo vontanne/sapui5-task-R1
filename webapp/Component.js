@@ -11,14 +11,16 @@ sap.ui.define(
       init() {
         UIComponent.prototype.init.call(this);
 
-        // set data model
         const data = {
           recipient: {
             name: "World",
           },
         };
-        const dataModel = new JSONModel(data);
-        this.setModel(dataModel);
+        const model = new JSONModel(data);
+        this.setModel(model);
+
+        // create the views based on the url/hash
+        this.getRouter().initialize();
       },
     });
     return Component;
