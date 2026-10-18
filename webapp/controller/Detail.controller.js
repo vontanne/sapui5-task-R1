@@ -3,15 +3,20 @@ sap.ui.define(
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/routing/History",
     "sap/m/MessageToast",
+    "sap/ui/model/json/JSONModel",
     "sap/ui/core/UIComponent",
   ],
-  function (Controller, History, MessageToast, UIComponent) {
+  function (Controller, History, MessageToast, JSONModel, UIComponent) {
     "use strict";
 
     const Detail = Controller.extend(
       "ui5.tutorial.walkthrough.controller.Detail",
       {
         onInit() {
+          const viewModel = new JSONModel({
+            currency: "EUR",
+          });
+          this.getView()?.setModel(viewModel, "view");
           const router = UIComponent.getRouterFor(this);
           router
             .getRoute("detail")
@@ -19,7 +24,7 @@ sap.ui.define(
         },
         onObjectMatched(event) {
           this.byId("rating").reset();
-          this.getView().bindElement({
+          this.getView()?.bindElement({
             path:
               "/" +
               window.decodeURIComponent(
@@ -41,7 +46,7 @@ sap.ui.define(
         onRatingChange(event) {
           const value = event.getParameter("value");
           const resourceBundle = this?.getView()
-            .getModel("i18n")
+            ?.getModel("i18n")
             ?.getResourceBundle();
           MessageToast.show(
             resourceBundle.getText("ratingConfirmation", [value]),
